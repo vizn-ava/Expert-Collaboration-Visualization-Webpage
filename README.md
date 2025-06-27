@@ -61,11 +61,13 @@ experts_summary.csv：包含专家总结的数据，用于项目中的某些功�
 
 使用说明
 1. 启动项目：
+下载npm install express
 在项目根目录运行以下命令启动前端服务：
 http-server 
 在项目根目录运行以下命令启动后端服务：
 node server.js
 打开浏览器访问`http://localhost:3000`（默认端口，可根据实际情况调整）。
+http://localhost:8080/
 
 3. 用户操作：
    输入文本：在输入框中输入一句话，点击“确认”按钮。
