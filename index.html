@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOE专家协作挖掘可视化展示</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- 引入axios库 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <h1>MOE专家协作挖掘可视化展示</h1>
+    </header>
+
+    <div class="main-content">
+        <div class="top-section">
+            <div class="input-module">
+                <h2>输入模块 <button id="confirm-button">确认</button></h2>
+                <textarea id="input-text" placeholder="在此输入句子..."></textarea>
+            </div>
+            <div class="output-section hidden">
+                <h3>带颜色输出模块</h3>
+                <div id="color-output" class="output-box"></div>
+            </div>
+            <div class="neural-mapping-module">
+                <h2>专家组在MOE网络上的映射</h2>
+                <div id="neural-mapping-content">
+                    <div class="circle-grid">
+                        <!-- 3行4列的圆圈 -->
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-section">
+            <div class="token-list">
+                <h2>token列表</h2>
+                <div class="visualization-area">
+                    <table class="token-table">
+                        <thead>
+                            <tr>
+                                <th>Token</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 动态生成的内容 -->
+                        </tbody>
+                    </table>
+                    <svg id="branch-svg" width="100%" height="500"></svg>
+                </div>
+            </div>
+            <div class="expert-explanation">
+                <h2>一级专家组合</h2>
+                <div class="visualization-area">
+                    <table class="token-table">
+                        <thead>
+                            <tr>
+                                <th>一级专家组合编号</th>
+                                <th>一级专家组合名称（功能）</th>
+                                <th>分解</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 初始为空，动态生成内容 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="expert-decomposition">
+                <h2>二级专家组合</h2>
+                <div class="visualization-area">
+                    <table class="token-table">
+                        <thead>
+                            <tr>
+                                <th>二级专家</th>
+                                <th>二级专家组合名称（功能）</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 初始为空，动态生成内容 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="decompose-button">Decompose</button>
+
+    <footer>
+        <p>© 2025 MOE可视化平台</p>
+    </footer>
+
+    <!-- 引入自定义的script.js -->
+    <script src="script.js"></script>
+</body>
+</html> 
