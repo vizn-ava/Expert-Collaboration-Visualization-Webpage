@@ -184,6 +184,41 @@ app.post('/api/second-level-experts', (req, res) => {
     res.json(secondLevelExperts);
 });
 
+// 查询Top 5二级专家组合
+function getTop5SecondLevelExperts(tokenVector) {
+    // 将激活向量转换为专家索引和值的数组
+    const expertScores = tokenVector
+        .map((value, index) => ({ index, value })) // 将值和索引配对
+        .filter(({ value }) => value > 0) // 过滤掉值为0的项
+        .sort((a, b) => b.value - a.value); // 按值从高到低排序
+
+    // 获取前5个专家的索引
+    const top5Indices = expertScores.slice(0, 5).map(({ index }) => index);
+
+    // 根据索引获取专家信息
+    const top5SecondLevelExperts = top5Indices.map(index => {
+        const expert = experts.find(e => e['Expert Index'] == index);
+        return expert ? expert : { 'Expert Index': index, 'Expert Name': 'Unknown', 'Function Description': 'No description available' };
+    });
+
+    // 返回结果
+    return top5SecondLevelExperts;
+}
+
+// API端点：查询Top 5二级专家组合
+app.post('/api/top5-second-level-experts', (req, res) => {
+    const { tokenVector } = req.body;
+    if (!tokenVector || !Array.isArray(tokenVector)) {
+        return res.status(400).json({ error: 'tokenVector 不能为空且必须为数组' });
+    }
+
+    // 查询Top 5二级专家组合
+    const top5SecondLevelExperts = getTop5SecondLevelExperts(tokenVector);
+
+    // 返回结果
+    res.json(top5SecondLevelExperts);
+});
+
 app.use(express.static('public')); // 确保静态文件目录正确配置
 
 // 启动服务器

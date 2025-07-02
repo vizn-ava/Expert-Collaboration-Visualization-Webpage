@@ -301,6 +301,38 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         console.error('未找到id为confirm-button的元素');
     }
+
+    const moeNetwork = document.getElementById('moe-network');
+    const rows = 64; // 每列64个圆圈
+    const cols = 27; // 共27列
+
+    // 清空现有的内容
+    moeNetwork.innerHTML = '';
+
+    // 动态生成64x27的圆圈
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            const circle = document.createElement('div');
+            circle.classList.add('circle');
+            moeNetwork.appendChild(circle);
+        }
+    }
+
+    const tokenTableBody = document.querySelector('.token-table tbody');
+    tokenTableBody.innerHTML = ''; // 清空token列表
+
+    // 主题切换功能
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-theme');
+            if (document.body.classList.contains('dark-theme')) {
+                themeToggle.textContent = '☀️';
+            } else {
+                themeToggle.textContent = '🌙';
+            }
+        });
+    }
 });
 
 // 发送用户输入到后端并展示结果
@@ -386,6 +418,13 @@ function displayTokenList(tokenVectors) {
 
                 // 显示Top 5专家
                 displayTop5Experts(response.data);
+
+                // 随机点亮圆圈
+                randomActivateCircles();
+
+                // 高亮当前行和按钮
+                const row = button.closest('tr');
+                highlightRowAndButton(row, button, 'token');
             } catch (error) {
                 console.error('查询Top 5专家失败:', error);
             }
@@ -435,17 +474,32 @@ function displayTop5Experts(top5Experts) {
         const button = document.createElement('button');
         button.textContent = '+'; // 按钮文本
         button.classList.add('add-button'); // 添加按钮样式类
-        button.addEventListener('click', () => {
+        button.addEventListener('click', async () => {
             console.log('分解按钮被点击，专家:', expert['Expert Name']); // 调试信息
-            // 显示三个示例的专家组合
-            displaySecondLevelExperts([
-                { 'Expert Index': '2-1', 'Expert Name': 'Second Expert A', 'Function Description': '功能描述A' },
-                { 'Expert Index': '2-2', 'Expert Name': 'Second Expert B', 'Function Description': '功能描述B' },
-                { 'Expert Index': '2-3', 'Expert Name': 'Second Expert C', 'Function Description': '功能描述C' }
-            ]);
 
-            // 随机点亮右上角MOE网络上的圆圈
-            randomActivateCircles();
+            // 生成64维随机向量
+            const randomVector = Array.from({ length: 64 }, () => Math.random());
+            console.log('生成的64维随机向量:', randomVector); // 调试信息
+
+            try {
+                // 发送请求查询Top 5二级专家组合
+                const response = await axios.post('http://localhost:3000/api/top5-second-level-experts', {
+                    tokenVector: randomVector
+                });
+                console.log('Top 5二级专家组合:', response.data); // 调试信息
+
+                // 显示Top 5二级专家组合
+                displaySecondLevelExperts(response.data);
+
+                // 随机点亮圆圈
+                randomActivateCircles();
+
+                // 高亮当前行和按钮
+                const row = button.closest('tr');
+                highlightRowAndButton(row, button, 'expert');
+            } catch (error) {
+                console.error('查询Top 5二级专家组合失败:', error);
+            }
         });
         buttonCell.appendChild(button);
         row.appendChild(buttonCell);
@@ -455,9 +509,12 @@ function displayTop5Experts(top5Experts) {
     });
 }
 
-// 随机点亮右上角MOE网络上的圆圈
+// 随机点亮圆圈
 function randomActivateCircles() {
-    const circles = document.querySelectorAll('.circle');
+    const moeNetwork = document.getElementById('moe-network');
+    const circles = moeNetwork.querySelectorAll('.circle');
+
+    // 随机点亮圆圈
     circles.forEach(circle => {
         if (Math.random() < 0.5) { // 50% 的概率激活
             circle.classList.add('active');
@@ -515,4 +572,31 @@ function updateTokenList(tokenVectors) {
             </tr>
         `)
         .join('');
+}
+
+let lastHighlightedRow = null;
+let lastHighlightedButton = null;
+let lastHighlightedColumn = null;
+
+// 高亮行和按钮
+function highlightRowAndButton(row, button, column) {
+    // 如果之前有高亮的行和按钮，且点击的是同一列，去除背景和按钮颜色
+    if (lastHighlightedRow && lastHighlightedColumn === column) {
+        lastHighlightedRow.style.backgroundColor = '';
+        lastHighlightedButton.style.backgroundColor = '';
+    }
+
+    // 如果之前有高亮的按钮，且点击的是不同列，复原按钮
+    if (lastHighlightedButton && lastHighlightedColumn !== column) {
+        lastHighlightedButton.style.backgroundColor = '';
+    }
+
+    // 高亮当前行和按钮
+    row.style.backgroundColor = '#ADD8E6'; // 浅蓝色
+    button.style.backgroundColor = '#ADD8E6'; // 浅蓝色
+
+    // 更新最后高亮的行、按钮和列
+    lastHighlightedRow = row;
+    lastHighlightedButton = button;
+    lastHighlightedColumn = column;
 } 

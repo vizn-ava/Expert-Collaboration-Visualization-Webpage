@@ -1,441 +1,517 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f8ff; /* 浅蓝色背景 */
-    color: #000080; /* 深蓝色文字 */
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #232946;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* 确保页面高度至少为视口高度 */
+    min-height: 100vh;
+    letter-spacing: 0.01em;
 }
 
 header {
-    background-color: #000080;
-    color: white;
+    background: none;
+    color: #232946;
     text-align: center;
-    padding: 20px 0;
+    padding: 48px 0 24px 0;
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    border-bottom: 1px solid #e0e6ed;
+    position: relative;
 }
 
 .main-content {
-    padding: 40px;
-    flex: 1; /* 使主要内容区域占据剩余空间 */
+    padding: 48px 0 0 0;
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.top-section {
+.row {
     display: flex;
-    justify-content: space-between;
-    gap: 5px; /* 将间隔从10px减小到5px */
+    width: 100%;
+    gap: 32px;
+    margin-bottom: 32px;
+}
+.first-row > .input-module,
+.first-row > .token-list {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 50%;
+    height: 250px;
+    box-sizing: border-box;
+}
+.second-row > .expert-explanation,
+.second-row > .expert-decomposition {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 50%;
+    height: 380px;
+    box-sizing: border-box;
+}
+.third-row {
+    justify-content: center;
+}
+.third-row > .neural-mapping-module {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 .input-module,
 .output-module,
 .neural-mapping-module {
     flex: 1;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+    padding: 32px 32px 24px 32px;
+    border: none;
+    border-radius: 32px;
+    background: #fff;
+    box-shadow: 0 4px 32px 0 rgba(44,62,80,0.08);
+    min-width: 320px;
 }
 
 .input-module h2, .output-module h2 {
-    margin: 0 0 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 16px;
 }
 
 #input-text, #output-content {
-    font-size: 18px; /* 将字体大小从16px增加到18px */
-    height: calc(100% - 60px);
+    font-size: 1.1rem;
+    height: 120px;
+    border-radius: 16px;
+    border: 1px solid #e0e6ed;
+    background: #f5f7fa;
+    color: #232946;
+    padding: 16px;
+    box-sizing: border-box;
+    margin-bottom: 8px;
 }
 
 #input-text {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
     resize: none;
 }
 
 #output-content {
-    padding: 10px;
-    background-color: #e6f7ff;
-    border-radius: 6px;
-    overflow-y: auto;
-}
-
-.bottom-section {
-    display: flex;
-    gap: 20px; /* 模块之间的间距 */
-    width: 100%;
-    height: 400px; /* 将高度从350px增加到400px */
-    margin-bottom: 100px;
-    margin-top: 0;
-    padding-top: 50px; /* 保持顶部内边距为50px */
-    background-color: #f0f8ff;
+    background: #f5f5f7;
+    border: none;
+    min-height: 80px;
 }
 
 .token-list {
-    flex: 1; /* 缩小 token 列表模块 */
-    max-width: 15%; /* 设置最大宽度为 15% */
-    min-width: 150px; /* 设置最小宽度，避免过小 */
-    background-color: white;
-    padding: 20px;
-    border-radius: 12px;
+    flex: 1;
+    max-width: 18%;
+    min-width: 180px;
+    background: #fff;
+    padding: 24px 16px;
+    border-radius: 24px;
     height: 100%;
-    padding-top: 20px;
     overflow-y: auto;
-    box-shadow: none; /* 移除阴影 */
+    box-shadow: 0 2px 16px 0 rgba(0,0,0,0.04);
 }
 
 .expert-explanation,
 .expert-decomposition {
-    flex: 2; /* 扩大右边两个模块 */
-    background-color: white;
-    padding: 20px;
-    border-radius: 12px;
-    height: 380px; /* 将高度从330px增加到380px */
-    padding-top: 20px;
+    flex: 2;
+    background: #fff;
+    padding: 24px 24px 16px 24px;
+    border-radius: 24px;
+    height: 380px;
     overflow-y: auto;
-    box-shadow: none; /* 移除阴影 */
+    box-shadow: 0 2px 16px 0 rgba(0,0,0,0.04);
 }
 
 .token-table {
     width: 100%;
-    table-layout: fixed; /* 固定表格布局 */
-    font-size: 18px; /* 将表格字体大小增加到18px */
-    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 1.1rem;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    background: none;
 }
 
 .token-table th,
 .token-table td {
-    padding: 8px; /* 恢复内边距 */
+    padding: 8px 4px;
     text-align: left;
-}
-
-.token-table th:nth-child(1),
-.token-table td:nth-child(1) {
-    width: 70%; /* Token 列宽度 */
-}
-
-.token-table th:nth-child(2),
-.token-table td:nth-child(2) {
-    width: 30%; /* 操作列宽度 */
-    text-align: center; /* 操作列内容居中 */
+    border: none;
+    background: none;
 }
 
 .token-table th {
-    background-color: #f5f5f5;
+    background: none;
+    color: #6a82fb;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.token-list h2 {
+    justify-content: flex-end;
 }
 
 .visualization-area {
-    height: calc(100% - 20px); /* 保持高度为calc(100% - 20px) */
-    background-color: #f5f5f5;
-    border-radius: 6px;
-    margin-top: 10px; /* 保持顶部外边距为10px */
+    background: none;
+    border-radius: 12px;
+    margin-top: 0;
+    padding: 0;
+    height: auto;
 }
 
 footer {
-    background-color: #000080;
-    color: white;
+    background: none;
+    color: #aeb8c4;
     text-align: center;
-    padding: 10px 0;
-    position: relative; /* 改为相对定位 */
-    width: 100%; /* 宽度占满整个页面 */
-    margin-top: auto; /* 将页脚推到页面底部 */
+    padding: 32px 0 16px 0;
+    font-size: 1rem;
+    border-top: 1px solid #e0e6ed;
+    margin-top: auto;
 }
 
-.add-button {
-    background-color: #000080; /* 深蓝色背景 */
-    color: white; /* 白色文字 */
+#confirm-button, .decompose-button, .add-button {
+    background: linear-gradient(90deg, #6a82fb 0%, #fc5c7d 100%);
+    color: #fff;
     border: none;
-    border-radius: 4px;
-    padding: 5px 10px;
+    border-radius: 999px;
+    padding: 10px 32px;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
+    box-shadow: 0 2px 8px 0 rgba(44,62,80,0.08);
+    transition: background 0.2s, box-shadow 0.2s;
 }
-
-.add-button:hover {
-    background-color: #1a1aff; /* 悬停时背景颜色 */
+#confirm-button:hover, .decompose-button:hover, .add-button:hover {
+    background: linear-gradient(90deg, #fc5c7d 0%, #6a82fb 100%);
+    box-shadow: 0 4px 16px 0 rgba(44,62,80,0.16);
 }
 
 #branch-svg {
-    position: fixed; /* 使用fixed定位，确保分支始终在最上层 */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* 防止SVG干扰点击事件 */
-    z-index: 1000; /* 确保SVG在最上层 */
+    pointer-events: none;
+    z-index: 1;
 }
 
-.branch {
-    stroke: #000080;
-    stroke-width: 2;
-    fill: none;
-}
-
-.branch-label {
-    font-size: 12px;
-    fill: #000080;
-}
-
-.expert-dot {
-    color: #000080;
-    font-size: 16px;
-    margin-right: 5px;
+.branch, .branch-label, .expert-dot {
+    color: #1d1d1f;
+    stroke: #1d1d1f;
+    fill: #1d1d1f;
 }
 
 .expert-decomposition .token-table td {
-    font-size: 14px;
-    line-height: 1.4;
+    font-size: 1rem;
+    line-height: 1.6;
 }
 
 .expert-explanation .token-table th:nth-child(1),
 .expert-explanation .token-table td:nth-child(1) {
-    width: 30%; /* 缩小专家组合列宽度 */
+    width: 30%;
 }
-
 .expert-explanation .token-table th:nth-child(2),
 .expert-explanation .token-table td:nth-child(2) {
-    width: 60%; /* 扩大语义标注列宽度 */
+    width: 60%;
 }
-
 .expert-explanation .token-table th:nth-child(3),
 .expert-explanation .token-table td:nth-child(3) {
-    width: 10%; /* 缩小操作列宽度 */
-    text-align: center; /* 操作列内容居中 */
+    width: 10%;
+    text-align: center;
 }
 
-/* 专家组合解释模块字体大小 */
-.expert-explanation {
-    font-size: 16px; /* 将专家组合解释模块字体大小增加到16px */
-}
-
-/* 专家组合分解模块字体大小 */
-.expert-decomposition {
-    font-size: 16px; /* 与专家组合解释模块字体大小一致 */
-}
-
-.expert-decomposition .token-table {
-    width: 100%;
-    table-layout: fixed; /* 固定表格布局 */
+.expert-explanation, .expert-decomposition {
+    font-size: 1.1rem;
 }
 
 .expert-decomposition .token-table th:nth-child(1),
 .expert-decomposition .token-table td:nth-child(1) {
-    width: 20%; /* 缩小专家列宽度 */
+    width: 20%;
 }
-
 .expert-decomposition .token-table th:nth-child(2),
 .expert-decomposition .token-table td:nth-child(2) {
-    width: 80%; /* 语义标注列宽度 */
+    width: 80%;
 }
 
-/* 添加专家染色样式 */
-#expert-A {
-    color: #800000; /* 深红色 */
+/* 专家染色和编号染色样式可保留或淡化 */
+#expert-A, #expert-B, #expert-C, #expert-D, #expert-E, #expert-F, #expert-G, #expert-H, #expert-I, #expert-J, #expert-K, #expert-L, #expert-M, #expert-N, #expert-O, #expert-P, #expert-Q, #expert-R, #expert-S, #expert-T, #expert-U, #expert-V, #expert-W, #expert-X, #expert-Y, #expert-Z {
+    color: #0071e3;
 }
 
-#expert-B {
-    color: #008080; /* 深青色 */
-}
-
-#expert-C {
-    color: #000080; /* 深蓝色 */
-}
-
-#expert-D {
-    color: #808000; /* 橄榄色 */
-}
-
-#expert-E {
-    color: #800080; /* 深紫色 */
-}
-
-#expert-F {
-    color: #008000; /* 深绿色 */
-}
-
-#expert-G {
-    color: #FF0000; /* 红色 */
-}
-
-#expert-H {
-    color: #00FF00; /* 绿色 */
-}
-
-#expert-I {
-    color: #0000FF; /* 蓝色 */
-}
-
-#expert-J {
-    color: #FFFF00; /* 黄色 */
-}
-
-#expert-K {
-    color: #FF00FF; /* 品红 */
-}
-
-#expert-L {
-    color: #00FFFF; /* 青色 */
-}
-
-#expert-M {
-    color: #FFA500; /* 橙色 */
-}
-
-#expert-N {
-    color: #800080; /* 紫色 */
-}
-
-#expert-O {
-    color: #008000; /* 深绿 */
-}
-
-#expert-P {
-    color: #800000; /* 深红 */
-}
-
-#expert-Q {
-    color: #008080; /* 深青 */
-}
-
-#expert-R {
-    color: #000080; /* 海军蓝 */
-}
-
-#expert-S {
-    color: #808000; /* 橄榄色 */
-}
-
-#expert-T {
-    color: #800080; /* 深紫 */
-}
-
-#expert-U {
-    color: #008000; /* 深绿 */
-}
-
-#expert-V {
-    color: #800000; /* 深红 */
-}
-
-#expert-W {
-    color: #008080; /* 深青 */
-}
-
-#expert-X {
-    color: #000080; /* 海军蓝 */
-}
-
-#expert-Y {
-    color: #808000; /* 橄榄色 */
-}
-
-#expert-Z {
-    color: #800080; /* 深紫 */
-}
-
-/* 添加专家组合编号染色样式 */
 .expert-explanation .token-table td:nth-child(1) {
-    color: #000080; /* 默认颜色 */
-}
-
-.expert-explanation .token-table td:nth-child(1) span {
-    color: inherit; /* 继承父元素颜色 */
-}
-
-/* 为特定专家组合编号添加颜色 */
-.expert-explanation .token-table td:nth-child(1):contains("#1-42") {
-    color: #FF0000; /* 红色 */
+    color: #1d1d1f;
 }
 
 .neural-mapping-module h2 {
-    margin-bottom: 10px;
-    font-size: 20px; /* 将标题字体大小增加到20px */
-    color: #333;
+    margin-bottom: 16px;
+    font-size: 1.2rem;
+    color: #1d1d1f;
+    font-weight: 500;
 }
 
 #neural-mapping-content {
-    height: 200px; /* 根据需要调整高度 */
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    height: 200px;
+    background: #fafafc;
+    border: 1px solid #f2f2f2;
+    border-radius: 12px;
     padding: 10px;
 }
 
-.circle-grid {
+#moe-network {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4列 */
-    grid-template-rows: repeat(3, 1fr); /* 3行 */
-    gap: 10px; /* 圆圈之间的间距 */
+    grid-template-columns: repeat(27, 1fr);
+    grid-template-rows: repeat(64, 1fr);
+    gap: 1px;
     width: 100%;
-    height: 100%;
+    height: 250px;
 }
 
 .circle {
-    width: 50px;
-    height: 50px;
-    background-color: white;
-    border: 2px solid #ccc;
+    width: 2px;
+    height: 2px;
+    border: 1px solid #e0e0e0;
     border-radius: 50%;
-    transition: background-color 0.3s ease; /* 添加颜色变化的过渡效果 */
+    background: transparent;
 }
-
 .circle.active {
-    background-color: #8B4513; /* 激活时圆圈颜色 */
+    background: linear-gradient(135deg, #6a82fb 0%, #fc5c7d 100%);
+    border: none;
 }
 
-/* 调整其他模块的字体大小 */
 .input-module h2, .output-module h2, .neural-mapping-module h2 {
-    font-size: 20px; /* 将标题字体大小增加到20px */
+    font-size: 1.2rem;
+    font-weight: 500;
 }
 
 .output-box {
     width: 100%;
     min-height: 50px;
-    border: 1px solid #ccc;
-    padding: 10px;
+    border: none;
+    padding: 16px;
     margin-top: 10px;
-    background-color: #f9f9f9;
+    background: #f5f5f7;
     overflow: auto;
+    border-radius: 12px;
 }
 
 .decompose-button {
-    background-color: #4CAF50; /* 绿色背景 */
-    color: white; /* 白色文字 */
-    border: none;
-    border-radius: 4px;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.decompose-button:hover {
-    background-color: #45a049; /* 悬停时背景颜色 */
+    margin: 32px auto 0 auto;
+    display: block;
+    background: #0071e3;
+    color: #fff;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 10px 28px;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
 }
 
 .hidden {
-    display: none; /* 隐藏元素 */
+    display: none;
 }
 
 .input-module h2 {
     display: flex;
-    justify-content: space-between; /* 将标题和按钮分开 */
-    align-items: center; /* 垂直居中 */
-    margin: 0 0 20px 0;
-}
-
-#confirm-button {
-    background-color: #000080; /* 深蓝色背景 */
-    color: white; /* 白色文字 */
-    border: none;
-    border-radius: 4px;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin-left: 10px; /* 与标题保持一定距离 */
-}
-
-#confirm-button:hover {
-    background-color: #1a1aff; /* 悬停时背景颜色 */
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 24px 0;
 }
 
 #decompose-button {
-    display: block; /* 确保按钮可见 */
+    display: block;
+}
+
+#input-module {
+    height: 250px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+#input-module, #moe-network {
+    width: 100%;
+}
+
+.token-table tr {
+    transition: background 0.2s;
+}
+
+/* 移除原有布局样式 */
+.top-section, .bottom-section {
+    display: none !important;
+}
+
+/* 其他细节优化 */
+::-webkit-scrollbar {
+    width: 8px;
+    background: #e0e6ed;
+    border-radius: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background: #c3cfe2;
+    border-radius: 8px;
+}
+
+/* 主题切换按钮样式 */
+.theme-toggle {
+    position: absolute;
+    top: 32px;
+    right: 48px;
+    z-index: 10;
+    background: linear-gradient(90deg, #6a82fb 0%, #fc5c7d 100%);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+    box-shadow: 0 2px 8px 0 rgba(44,62,80,0.12);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+.theme-toggle:hover {
+    background: linear-gradient(90deg, #fc5c7d 0%, #6a82fb 100%);
+    box-shadow: 0 4px 16px 0 rgba(44,62,80,0.18);
+}
+
+/* 深色主题 */
+.dark-theme {
+    background: linear-gradient(135deg, #181c24 0%, #232946 100%) !important;
+    color: #f5f7fa !important;
+}
+.dark-theme header {
+    color: #f5f7fa;
+    border-bottom: 1px solid #232946;
+}
+.dark-theme .main-content {
+    background: none;
+}
+.dark-theme .row > div,
+.dark-theme .input-module, .dark-theme .token-list, .dark-theme .expert-explanation, .dark-theme .expert-decomposition, .dark-theme .neural-mapping-module {
+    background: #232946;
+    color: #f5f7fa;
+    box-shadow: 0 4px 32px 0 rgba(0,0,0,0.32);
+    border-radius: 32px;
+}
+.dark-theme .token-table th {
+    color: #fc5c7d;
+}
+.dark-theme .token-table td {
+    color: #f5f7fa;
+}
+.dark-theme #input-text, .dark-theme textarea, .dark-theme input, .dark-theme select {
+    background: #181c24;
+    color: #f5f7fa;
+    border: 1px solid #232946;
+}
+.dark-theme #moe-network .circle.active {
+    background: linear-gradient(135deg, #fc5c7d 0%, #6a82fb 100%);
+}
+.dark-theme #confirm-button, .dark-theme .decompose-button, .dark-theme .add-button, .dark-theme .theme-toggle {
+    background: linear-gradient(90deg, #232946 0%, #fc5c7d 100%);
+    color: #fff;
+}
+.dark-theme #confirm-button:hover, .dark-theme .decompose-button:hover, .dark-theme .add-button:hover, .dark-theme .theme-toggle:hover {
+    background: linear-gradient(90deg, #fc5c7d 0%, #232946 100%);
+}
+.dark-theme footer {
+    color: #aeb8c4;
+    border-top: 1px solid #232946;
+}
+.dark-theme ::-webkit-scrollbar-thumb {
+    background: #232946;
+}
+
+/* 深色模式下专家编号为白色 */
+.dark-theme .expert-explanation .token-table td:nth-child(1),
+.dark-theme .expert-explanation .token-table th:nth-child(1) {
+    color: #fff !important;
+}
+/* 深色模式下MOE网络映射标题为白色 */
+.dark-theme .neural-mapping-module h2 {
+    color: #fff !important;
+}
+/* 按钮选中/悬停色更搭配 */
+#confirm-button:active, .decompose-button:active, .add-button:active,
+#confirm-button:focus, .decompose-button:focus, .add-button:focus,
+#confirm-button.selected, .decompose-button.selected, .add-button.selected {
+    background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%) !important;
+    color: #fff;
+}
+.dark-theme #confirm-button:active, .dark-theme .decompose-button:active, .dark-theme .add-button:active,
+.dark-theme #confirm-button:focus, .dark-theme .decompose-button:focus, .dark-theme .add-button:focus,
+.dark-theme #confirm-button.selected, .dark-theme .decompose-button.selected, .dark-theme .add-button.selected {
+    background: linear-gradient(90deg, #fc5c7d 0%, #6a82fb 100%) !important;
+    color: #fff;
+}
+/* 标题字体更高级 */
+header h1, .expert-explanation h2, .expert-decomposition h2, .token-list h2, .neural-mapping-module h2 {
+    font-family: 'Inter', 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    font-size: 2rem;
+    color: #232946;
+}
+.dark-theme header h1, .dark-theme .expert-explanation h2, .dark-theme .expert-decomposition h2, .dark-theme .token-list h2, .dark-theme .neural-mapping-module h2 {
+    color: #fff;
+}
+
+/* 深色模式下token高亮行背景和字体优化 */
+.dark-theme .token-table tr.highlight, .dark-theme .token-table tr.selected, .dark-theme .token-table tr.active, .dark-theme .token-table tr[style*='background'] {
+    background: linear-gradient(90deg, rgba(161,140,209,0.45) 0%, rgba(252,92,125,0.25) 100%) !important;
+}
+.dark-theme .token-table tr.highlight td, .dark-theme .token-table tr.selected td, .dark-theme .token-table tr.active td, .dark-theme .token-table tr[style*='background'] td {
+    color: #fff !important;
+}
+/* 标题更大更有质感 */
+header h1, .expert-explanation h2, .expert-decomposition h2, .token-list h2, .neural-mapping-module h2 {
+    font-size: 2.6rem;
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    text-shadow: 0 4px 24px rgba(44,62,80,0.10), 0 1.5px 0 #fff2, 0 0.5px 0 #fff4;
+}
+.dark-theme header h1, .dark-theme .expert-explanation h2, .dark-theme .expert-decomposition h2, .dark-theme .token-list h2, .dark-theme .neural-mapping-module h2 {
+    text-shadow: 0 4px 24px rgba(161,140,209,0.18), 0 1.5px 0 #0004, 0 0.5px 0 #0002;
+}
+
+/* 统一所有模块标题样式 */
+header h1, .expert-explanation h2, .expert-decomposition h2, .token-list h2, .neural-mapping-module h2, .input-module h2 {
+    font-family: 'Inter', 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    text-shadow: 0 4px 24px rgba(44,62,80,0.10), 0 1.5px 0 #fff2, 0 0.5px 0 #fff4;
+    color: #232946;
+}
+.dark-theme header h1, .dark-theme .expert-explanation h2, .dark-theme .expert-decomposition h2, .dark-theme .token-list h2, .dark-theme .neural-mapping-module h2, .dark-theme .input-module h2 {
+    color: #fff;
+    text-shadow: 0 4px 24px rgba(161,140,209,0.18), 0 1.5px 0 #0004, 0 0.5px 0 #0002;
+}
+/* 浅色模式下token高亮行背景优化为蓝紫渐变，字体深色 */
+.token-table tr.highlight, .token-table tr.selected, .token-table tr.active, .token-table tr[style*='background'] {
+    background: linear-gradient(90deg, #a18cd1 0%, #6a82fb 100%) !important;
+}
+.token-table tr.highlight td, .token-table tr.selected td, .token-table tr.active td, .token-table tr[style*='background'] td {
+    color: #232946 !important;
+}
+
+header h1 {
+    font-size: 2.8rem !important;
+}
+.expert-explanation h2, .expert-decomposition h2, .token-list h2, .neural-mapping-module h2, .input-module h2 {
+    font-size: 1.5rem !important;
+}
+.dark-theme .expert-explanation h2, .dark-theme .expert-decomposition h2, .dark-theme .token-list h2, .dark-theme .neural-mapping-module h2, .dark-theme .input-module h2 {
+    font-size: 1.5rem !important;
 } 
