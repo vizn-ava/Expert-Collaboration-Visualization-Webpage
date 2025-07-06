@@ -390,7 +390,9 @@ function displayTokenList(tokenVectors) {
 
         // 创建Token单元格
         const tokenCell = document.createElement('td');
-        tokenCell.textContent = tokenVector.token;
+        // 首字母大写
+        const token = tokenVector.token;
+        tokenCell.textContent = token.charAt(0).toUpperCase() + token.slice(1);
         row.appendChild(tokenCell);
 
         // 创建按钮单元格
